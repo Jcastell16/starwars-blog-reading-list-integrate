@@ -1,0 +1,5 @@
+
+.horizontal-scroll-wrapper > .row {
+    overflow-x: auto;
+    white-space: nowrap;
+}
