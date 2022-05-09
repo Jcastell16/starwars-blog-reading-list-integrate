@@ -12,7 +12,9 @@ export const Navbar = () => {
 			<Link to="/">
 				<img src={starwarsImage} />
 			</Link>
-			<div className="dropdown mx-5">
+			{store.token.length > 0 ? (
+			<div className="d-flex justify-content-between mt-3">
+			<div className="dropdown mx-1">
 				<Link className="btn btn-primary dropdown-toggle" to="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 					<strong> Favorites </strong>  <span className="badge bg-secondary"> {store.favorites.length} </span>
 				</Link>
@@ -21,12 +23,22 @@ export const Navbar = () => {
 					{store.favorites.map((Item) => {
 						
 						return (
-							<li key={Item._id}><Link className="dropdown-item d-flex justify-content-between" to=""><span>{Item.properties.name}</span> <button type="button" onClick={() => actions.addFavorites(Item._id)} className="btn btn-outline-danger ms-2"><i className="far fa-trash-alt"></i></button> </Link></li>
-						)
+							<>
+							<li key={Item.nature_id}><Link className="dropdown-item d-flex justify-content-between" to=""><span>{Item.name}</span> <button type="button" onClick={() => actions.deleteFavorite(Item.nature_id, Item.nature)} className="btn btn-outline-danger ms-2"><i className="far fa-trash-alt"></i></button> </Link></li>
+							</>
+							)
 					}
 					)}
 				</ul>
 			</div>
+			<Link to="" className="btn btn-primary mx-1 ustify-content-center" onClick={() => actions.handleLogout()}><i className="fas fa-sign-out-alt fs-6"></i></Link>
+			</div>
+			):(
+				<div className="p-3">
+				<Link to="/register" className="btn btn-lg btn-success mx-1">Register</Link>
+				<Link to="/" className="btn btn-lg  btn-primary mx-1">Login</Link>
+				</div>
+			)}
 		</nav>
 	);
 };
